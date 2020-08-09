@@ -54,9 +54,9 @@ elif (float(df.iloc[[1]]['open']) < float(pre_df.iloc[0]['DayLow'])):
     f_list.append(float(df.iloc[[1]]['low']))
     f_list.append(float(float(df.iloc[[1]]['low']) - points))
     f_list.append(float(df.iloc[[1]]['high']))
-if f_list is not None:
 
-    book = openpyxl.load_workbook('gapup.xlsx')
-    sheet = book.active
-    sheet.append(f_list)
-    book.save('gapup.xlsx')
+
+book = openpyxl.load_workbook('gapup.xlsx')
+sheet = book.active
+sheet.append(f_list)
+book.save('gapup.xlsx')
