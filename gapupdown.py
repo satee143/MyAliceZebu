@@ -12,12 +12,12 @@ socket_opened = True
 
 
 def event_handler_quote_update(message):
-    f = csv.writer(open('gapupdown.csv', 'w', newline=''))
+    f = csv.writer(open('gapupdown.txt', 'w', newline=''))
     # print(message)
     print(message['high'])
     print(message['low'])
     print(message['ltp'], message['exchange_time_stamp'])
-    f.writerow([message['high'], message['low'], message['exchange_time_stamp']])
+    f.writerow([message['high'], message['low']])
 
 
 def open_callback():
