@@ -1,6 +1,7 @@
 import datetime
 import openpyxl
 import pandas as pd
+
 ## Creating list to add excel
 f_list = []
 
@@ -14,7 +15,6 @@ df.set_index('Times', inplace=True)
 df = df['LTP'].resample('30min', offset=15).ohlc().dropna()
 # df=df.drop_duplicates(inplace=False)
 print((df))
-
 
 ## Checking the condition  first candle low  lessthan the first candle open
 ## second candle low lessthan second candle open

@@ -1,7 +1,7 @@
+import datetime
+
 import psycopg2
 from alice_blue import *
-
-import datetime
 
 access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@1', twoFA='a',
                                                     api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')
@@ -19,8 +19,8 @@ def event_handler_quote_update(message):
           datetime.datetime.fromtimestamp(int(message['exchange_time_stamp'])))
     sql = "insert into banknifty values('%s',%f,%f,%f,%f,%f,'%s')"
     cur.execute(sql % (
-    message['instrument'][2], message['ltp'], message['open'], message['high'], message['low'], message['close'],
-    datetime.datetime.fromtimestamp(message['exchange_time_stamp'])))
+        message['instrument'][2], message['ltp'], message['open'], message['high'], message['low'], message['close'],
+        datetime.datetime.fromtimestamp(message['exchange_time_stamp'])))
 
     con.commit()
 

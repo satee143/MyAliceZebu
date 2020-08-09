@@ -1,11 +1,10 @@
+import datetime
 import os
+from datetime import timedelta
 
 import nsepy
 import openpyxl
 import pytest
-
-import datetime
-from datetime import timedelta
 
 f_list = []
 

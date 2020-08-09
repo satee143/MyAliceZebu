@@ -1,12 +1,11 @@
 # import logging
 # logging.basicConfig(level=logging.DEBUG)
 import csv
+import datetime
+from threading import Timer
 from time import sleep
 
 from alice_blue import *
-
-import datetime
-from threading import Timer
 
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=21, minute=36, second=20, microsecond=0)

@@ -1,11 +1,10 @@
 import csv
+import datetime
+from threading import Timer
 from time import sleep
 
 import requests
 from alice_blue import *
-
-import datetime
-from threading import Timer
 
 x = datetime.datetime.today()
 y = x.replace(day=x.day + 1, hour=0, minute=53, second=16, microsecond=0)

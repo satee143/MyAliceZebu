@@ -1,9 +1,8 @@
+import datetime
 import os
 
 import nsepy
 import plotly.graph_objects as go
-
-import datetime
 
 global df
 

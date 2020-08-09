@@ -1,7 +1,7 @@
 # pylint:disable=E1101
-import nsepy
-
 import datetime
+
+import nsepy
 
 # df = nsepy.get_history(symbol='SBIN', start=date(2020,4,1), end=date(2020,5,30))
 df = nsepy.get_history(symbol='SBIN', start=datetime.date(2020, 4, 1), end=datetime.date.today())

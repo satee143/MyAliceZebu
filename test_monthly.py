@@ -1,11 +1,10 @@
+# import nsepy
+import datetime
 import os
+from datetime import timedelta
 
 import openpyxl
 import plotly.graph_objects as go
-
-# import nsepy
-import datetime
-from datetime import timedelta
 
 global df, buy_list
 global updates

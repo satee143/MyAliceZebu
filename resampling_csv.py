@@ -1,5 +1,6 @@
-import pandas as pd
 from datetime import datetime
+
+import pandas as pd
 
 df_cols = ["LTP", 'Times']
 df = pd.read_csv('/storage/emulated/0/termux/downloads/bank_nifty.csv', names=df_cols, index_col=1, parse_dates=True)

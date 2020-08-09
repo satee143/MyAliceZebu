@@ -1,9 +1,8 @@
 # pylint:disable=E0611
+import datetime
 import os
 
 import nsepy
-
-import datetime
 import pandas as pd
 
 # from datetime import timedelta

@@ -1,11 +1,10 @@
 # import logging
 # logging.basicConfig(level=logging.DEBUG)
 import csv
+import datetime
 from time import sleep
 
 from alice_blue import *
-
-import datetime
 
 
 def abc():

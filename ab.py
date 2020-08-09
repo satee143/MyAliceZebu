@@ -1,6 +1,6 @@
-from alice_blue import *
-
 import datetime
+
+from alice_blue import *
 
 access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@4', twoFA='a',
                                                     api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')

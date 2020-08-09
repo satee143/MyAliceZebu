@@ -1,11 +1,10 @@
+import datetime
 import os
 
 import numpy as np
+import pandas as pd
 from matplotlib import pyplot as plt
 from nsepy import get_history
-
-import datetime
-import pandas as pd
 
 quote = 'infy'
 # quote=input('Enter the NSE Symbol')

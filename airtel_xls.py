@@ -1,10 +1,9 @@
 ### Importing modules ###
 import os
+from datetime import datetime
 
 import PyPDF2
 import pandas as pd
-
-from datetime import datetime
 
 os.chdir('/storage/emulated/0/Download')
 
