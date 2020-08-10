@@ -45,6 +45,8 @@ if (float(df.iloc[[1]]['close']) < float(df.iloc[[1]]['open']) and
     f_list.append(float(df.iloc[[2]]['low'] - 2))
     f_list.append(float(float(df.iloc[[2]]['low']) - points))
     f_list.append(float(df.iloc[[2]]['high']))
+    # #print(zebu_api.place_bracket_order('NFO',44329, 'BANKNIFTY20AUGFUT', 'bo', 'SELL', 'DAY', float(df.iloc[[2]]['low'] - 2), 'L', '25',
+    # (float(df.iloc[[2]]['low']) - points), float(df.iloc[[2]]['high']), 5))
 
 
 ## 1st and 2nd Candle should be green i.e: 1stcandle Close greater than 1st candle Open and
@@ -64,6 +66,8 @@ elif (float(df.iloc[[1]]['close']) > float(df.iloc[[1]]['open']) and
     f_list.append(float(df.iloc[[2]]['high'] + 2))
     f_list.append(float(float(df.iloc[[2]]['high']) + points))
     f_list.append(float(df.iloc[[2]]['low']))
+    # #print(zebu_api.place_bracket_order('NFO',44329, 'BANKNIFTY20AUGFUT', 'bo', 'BUY', 'DAY', float(df.iloc[[2]]['high'] + 2), 'L', '25',
+    # (float(float(df.iloc[[2]]['high']) + points), float(df.iloc[[2]]['low']), 5))
 
 book = openpyxl.load_workbook('bank_results.xlsx')
 sheet = book.active
