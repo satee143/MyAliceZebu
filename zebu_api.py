@@ -4,18 +4,21 @@ import json
 import jsonpath
 import requests
 
-global headers
-global baseurl
-baseurl = 'https://www.zebull.in/rest/MobullService/v1/'
-headers = {'Content-Type': 'application/json'}
+
 
 class ZebuAPI:
+
+    def __init__(self):
+        self.baseurl = 'https://www.zebull.in/rest/MobullService/v1/'
+        self.headers = {'Content-Type': 'application/json'}
+
+
     def get_encryption_key(self):
         url_pass = "customer/getAPIEncpkey"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         payload = '{"userId": "DEL16035"}'
         # headers = {'Content-Type': 'application/json'}
-        response = requests.post(url, payload, headers=headers, verify=False)
+        response = requests.post(url, payload, headers=self.headers, verify=False)
         enc_key = jsonpath.jsonpath(json.loads(response.text), 'encKey')
         return enc_key[0]
 
@@ -29,10 +32,10 @@ class ZebuAPI:
 
     def get_session_id(self):
         url_pass = "customer/getUserSID"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         userdata = {'userId': 'DEL16035', 'userData': self.api_to_hash()}
         json_object = json.dumps(userdata)
-        response = requests.post(url, json_object, headers=headers, verify=False)
+        response = requests.post(url, json_object, headers=self.headers, verify=False)
         session_id = jsonpath.jsonpath(json.loads(response.text), 'sessionID')
         return session_id[0]
 
@@ -44,7 +47,7 @@ class ZebuAPI:
 
     def get_limits(self):
         url_pass = "limits/getRmsLimits"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         payload = {}
         headers = {'Authorization': self.auther_key()}
         response = requests.get(url, payload, headers=headers, verify=False)
@@ -67,7 +70,7 @@ class ZebuAPI:
                             trigger_price='0',
                             product_code='mis'):
         url_pass = "placeOrder/executePlaceOrder"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
 
         payload = {'complexty': complexty, 'trading_symbol': symbol, 'discqty': discqty, 'exch': exchange,
@@ -85,7 +88,7 @@ class ZebuAPI:
                             stoploss, t_stoploss, discqty='0', trigger_price='0',
                             product_code='mis'):
         url_pass = "placeOrder/executePlaceOrder"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'complexty': complexty, 'trading_symbol': symbol, 'discqty': discqty, 'exch': exchange,
                    'transtype': order_type.upper(), 'ret': validity.upper(), 'prctyp': price_type, 'qty': quantity,
@@ -101,7 +104,7 @@ class ZebuAPI:
 
     def get_order_book(self):
         url_pass = "placeOrder/fetchOrderBook"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         payload = {}
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         response = requests.get(url, payload, headers=headers, verify=False)
@@ -109,7 +112,7 @@ class ZebuAPI:
 
     def get_trade_book(self):
         url_pass = "placeOrder/fetchTradeBook"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         payload = {}
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         response = requests.get(url, payload, headers=headers, verify=False)
@@ -117,7 +120,7 @@ class ZebuAPI:
 
     def modify_order(self,exchange, nest_ref, symbol, price, price_type, quantity, discqty='0', trigger_price='0'):
         url_pass = "placeOrder/executePlaceOrder"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'discqty': discqty, 'exch': exchange, 'filledQuantity': '0',
                    'nestOrderNumber': nest_ref, 'trading_symbol': symbol,
@@ -130,7 +133,7 @@ class ZebuAPI:
 
     def cancel_order(self,exchange, symbol, nest_ref):
         url_pass = "placeOrder/cancelOrder"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'exch': exchange,
                    'nestOrderNumber': nest_ref, 'trading_symbol': symbol}
@@ -141,7 +144,7 @@ class ZebuAPI:
 
     def nse_order_history(self,nest_ref):
         url_pass = "placeOrder/orderHistory"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'nestOrderNumber': nest_ref}
         payload = [payload]
@@ -151,7 +154,7 @@ class ZebuAPI:
 
     def get_holdings(self):
         url_pass = "positionAndHoldings/holdings"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {}
         payload = [payload]
@@ -161,7 +164,7 @@ class ZebuAPI:
 
     def get_positions(self,retention):
         url_pass = "positionAndHoldings/positionBook"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'ret': retention}
         payload = json.dumps(payload)
@@ -170,7 +173,7 @@ class ZebuAPI:
 
     def conversion_position(self,exchange, quantity, symbol):
         url_pass = "positionAndHoldings/positionConvertion"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'exch': exchange, 'productTocode': 'NRML', 'tsym': '',
                    'qty': quantity, 'transtype': 'B', 'tokenNO': '', 'type': 'DAY',
@@ -183,11 +186,11 @@ class ZebuAPI:
 
     def square_off_position(self,exchange, symbol, quantity, token):
         url_pass = "positionAndHoldings/sqrOofPosition"
-        url = baseurl + url_pass
+        url = self.baseurl + url_pass
         payload = {'exchSeg': exchange, 'pCode': 'MIS', 'netQty': quantity, 'tokenNO': '', 'symbol': symbol}
         payload = [payload]
         payload = json.dumps(payload)
-        response = requests.post(url, headers=headers, data=payload, verify=False)
+        response = requests.post(url, headers=self.headers, data=payload, verify=False)
         print(response.text)
 
 
