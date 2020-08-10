@@ -2,7 +2,7 @@ import datetime
 import os
 
 import nsepy
-import plotly.graph_objects as go
+#import plotly.graph_objects as go
 
 global df
 
@@ -27,7 +27,7 @@ def create_chart():
     print('After resampling')
     print(df)
     df.to_excel('monthly.xlsx')
-    fig = go.Figure(data=[go.Ohlc(x=df['Date'], open=df['open'], high=df['high'], low=df['low'], close=df['close'])])
+    #fig = go.Figure(data=[go.Ohlc(x=df['Date'], open=df['open'], high=df['high'], low=df['low'], close=df['close'])])
     df['HA_Close'] = (df['open'] + df['high'] + df['low'] + df['close']) / 4
     df['HA_Open'] = (df['open'].shift(1) + df['open'].shift(1)) / 2
     df.iloc[0, df.columns.get_loc("HA_Open")] = (df.iloc[0]['open'] + df.iloc[0]['close']) / 2
@@ -35,8 +35,8 @@ def create_chart():
     df['HA_Low'] = df[['high', 'low', 'HA_Open', 'HA_Close']].min(axis=1)
 
     print(df[['Date', 'HA_Open', 'HA_High', 'HA_Low', 'HA_Close']])
-    fig = go.Figure(data=[
-        go.Candlestick(x=df['Date'], open=df['HA_Open'], high=df['HA_High'], low=df['HA_Low'], close=df['HA_Close'])])
+    # fig = go.Figure(data=[
+    #     go.Candlestick(x=df['Date'], open=df['HA_Open'], high=df['HA_High'], low=df['HA_Low'], close=df['HA_Close'])])
 
     if (float(df.iloc[[-2]]['HA_High']) <= float(df.iloc[[-2]]['HA_Open'])):
         if (float(df.iloc[[-2]]['HA_Low']) <= float(df.iloc[[-2]]['HA_Close'])):
@@ -44,7 +44,7 @@ def create_chart():
     if (float(df.iloc[[-2]]['HA_Low']) >= float(df.iloc[[-2]]['HA_Open'])):
         if ((float(df.iloc[[-2]]['HA_High']) >= float(df.iloc[[-2]]['HA_Close']))):
             print('Buy Recommanded Price:', float(df.iloc[[-2]]['HA_High']) * 102 / 100)
-    fig.show()
+    #fig.show()
     return df
 
 
@@ -81,6 +81,6 @@ def buy_sell():
 
     return (sigPriceBuy, sigPriceSell)
 '''
-os.chdir('/storage/emulated/0/bluetooth')
+#os.chdir('/storage/emulated/0/bluetooth')
 
 create_chart()

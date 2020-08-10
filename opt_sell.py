@@ -6,10 +6,10 @@ from time import sleep
 import requests
 from alice_blue import *
 
-x = datetime.datetime.today()
-y = x.replace(day=x.day + 1, hour=0, minute=53, second=16, microsecond=0)
-delta_t = y - x
-secs = delta_t.seconds + 1
+# x = datetime.datetime.today()
+# y = x.replace(day=x.day + 1, hour=0, minute=53, second=16, microsecond=0)
+# delta_t = y - x
+# secs = delta_t.seconds + 1
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36',
@@ -50,7 +50,7 @@ def calling_results():
     else:
         return get_2_top_loosers()
 
-
+print(get_nifty_status())
 def abc():
     access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@9', twoFA='a',
                                                         api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')
@@ -101,6 +101,6 @@ def abc():
             print('3 cond', x[0], x[4])
         print(x)
 
-
-t = Timer(secs, abc)
-t.start()
+#
+# t = Timer(secs, abc)
+# t.start()
