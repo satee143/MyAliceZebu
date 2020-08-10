@@ -1,6 +1,5 @@
 import hashlib
 import json
-
 import jsonpath
 import requests
 
@@ -11,6 +10,7 @@ headers = {'Content-Type': 'application/json'}
 
 
 def get_encryption_key():
+    '''Get encryption key by passing user id '''
     url_pass = "customer/getAPIEncpkey"
     url = baseurl + url_pass
     payload = '{"userId": "DEL16035"}'
