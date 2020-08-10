@@ -27,7 +27,9 @@ if (float(df.iloc[[1]]['high']) > float(df.iloc[[0]]['high']) and
     f_list.append(float(float(df.iloc[[1]]['low']) - points))
     f_list.append(float(df.iloc[[1]]['high']))
     #print(zebu_api.place_regular_order('NFO','NIFTY20AUGFUT','regular','SELL','DAY',float(df.iloc[[1]]['low']),'L','150'))
-    print(zebu_api.place_bracket_order('NFO', 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', float(df.iloc[[1]]['low']), 'L', '75', 3, 4, 5))
+    print(zebu_api.place_bracket_order('NFO',44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', float(df.iloc[[1]]['low']), 'L', '75',
+                                       float(float(df.iloc[[1]]['low']) - points),
+                                       float(df.iloc[[1]]['high']), 5))
 
 elif (float(df.iloc[[1]]['low']) < float(df.iloc[[0]]['low']) and
       float(df.iloc[[1]]['high']) < float(df.iloc[[0]]['high'])):
@@ -42,8 +44,10 @@ elif (float(df.iloc[[1]]['low']) < float(df.iloc[[0]]['low']) and
     f_list.append(float(df.iloc[[1]]['high']))
     f_list.append(float(float(df.iloc[[1]]['high']) + points))
     f_list.append(float(df.iloc[[1]]['low']))
-    print(zebu_api.place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', float(df.iloc[[1]]['high']), 'L',
-                                     '75'))
+    print(zebu_api.place_bracket_order('NFO',44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', float(df.iloc[[1]]['high']), 'L', '75',
+                                       float(float(df.iloc[[1]]['high']) + points),
+                                       float(df.iloc[[1]]['low']), 5))
+
 
 book = openpyxl.load_workbook('results.xlsx')
 sheet = book.active
