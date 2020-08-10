@@ -1,8 +1,9 @@
 import datetime
-
+from zebu_api import ZebuAPI
 import openpyxl
 import pandas as pd
 
+zebu_api=ZebuAPI()
 f_list = []
 df_cols = ["LTP", 'Times']
 df = pd.read_csv(str(datetime.date.today()) + '.csv', names=df_cols, index_col=1, parse_dates=True)
@@ -25,7 +26,8 @@ if (float(df.iloc[[1]]['high']) > float(df.iloc[[0]]['high']) and
     f_list.append(float(df.iloc[[1]]['low']))
     f_list.append(float(float(df.iloc[[1]]['low']) - points))
     f_list.append(float(df.iloc[[1]]['high']))
-    # zebu_api.place_bracket_order('NFO','NIFTYJUL20FUT','BO','BUY','DAY',10300,'l',75,10400,10200,20,)
+    #print(zebu_api.place_regular_order('NFO','NIFTY20AUGFUT','regular','SELL','DAY',float(df.iloc[[1]]['low']),'L','150'))
+    print(zebu_api.place_bracket_order('NFO', 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', float(df.iloc[[1]]['low']), 'L', '75', 3, 4, 5))
 
 elif (float(df.iloc[[1]]['low']) < float(df.iloc[[0]]['low']) and
       float(df.iloc[[1]]['high']) < float(df.iloc[[0]]['high'])):
@@ -40,6 +42,8 @@ elif (float(df.iloc[[1]]['low']) < float(df.iloc[[0]]['low']) and
     f_list.append(float(df.iloc[[1]]['high']))
     f_list.append(float(float(df.iloc[[1]]['high']) + points))
     f_list.append(float(df.iloc[[1]]['low']))
+    print(zebu_api.place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', float(df.iloc[[1]]['high']), 'L',
+                                     '75'))
 
 book = openpyxl.load_workbook('results.xlsx')
 sheet = book.active
