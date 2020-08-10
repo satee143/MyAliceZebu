@@ -3,18 +3,18 @@ import datetime
 import openpyxl
 import pandas as pd
 
-### BANK NIFTY BUY and SELL strategy
+# BANK NIFTY BUY and SELL strategy
 ## Time Frame Should be 30 Min
-      ## FOR BUY STRATEGY ##
+## FOR BUY STRATEGY ##
 ## 1st and 2nd Candle should be green i.e: 1stcandle Close greater than 1st candle Open and
-                                        ## 2nd Candle Close greater than 2nd candle open
+## 2nd Candle Close greater than 2nd candle open
 ##2nd candle High should be entry point and should be break in 3rd candle only
 ## Stop loss should be 2nd candle low
 ## Target is 1:1
 
-       ## FOR SELL STRATEGY ##
+## FOR SELL STRATEGY ##
 ## 1st and 2nd Candle should be red i.e: 1stcandle Close less than 1st candle Open and
-                                        ## 2nd Candle Close less than 2nd candle open
+## 2nd Candle Close less than 2nd candle open
 ##2nd candle low should be entry point and should be break in 3rd candle only
 ## Stop loss should be 2nd candle high
 ## Target is 1:1
@@ -32,8 +32,8 @@ df = df['LTP'].resample('30min', base=15).ohlc().dropna()
 print((df))
 
 if (float(df.iloc[[1]]['close']) < float(df.iloc[[1]]['open']) and
-      float(df.iloc[[2]]['close']) < float(df.iloc[[2]]['open']) and
-      float(df.iloc[[2]]['low']) < float(df.iloc[[1]]['low'])):
+        float(df.iloc[[2]]['close']) < float(df.iloc[[2]]['open']) and
+        float(df.iloc[[2]]['low']) < float(df.iloc[[1]]['low'])):
 
     print('Bank Nifty Future Sell Recommanded Price is  :', float(df.iloc[[2]]['low'] - 2))
     points = float(df.iloc[[2]]['high'] - df.iloc[[2]]['low'])
@@ -48,7 +48,7 @@ if (float(df.iloc[[1]]['close']) < float(df.iloc[[1]]['open']) and
 
 
 ## 1st and 2nd Candle should be green i.e: 1stcandle Close greater than 1st candle Open and
-                                        ## 2nd Candle Close greater than 2nd candle open
+## 2nd Candle Close greater than 2nd candle open
 elif (float(df.iloc[[1]]['close']) > float(df.iloc[[1]]['open']) and
       float(df.iloc[[2]]['close']) > float(df.iloc[[2]]['open']) and
       float(df.iloc[[2]]['high']) > float(df.iloc[[1]]['high'])):
