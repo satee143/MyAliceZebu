@@ -81,7 +81,7 @@ class ZebuAPI:
         response_status = json.loads(response.text)
         return response_status[0]['nestOrderNumber']
 
-    def place_bracket_order(self,exchange, symbol, complexty, order_type, validity, price, price_type, quantity, target,
+    def place_bracket_order(self,exchange,symbol_id, symbol, complexty, order_type, validity, price, price_type, quantity, target,
                             stoploss, t_stoploss, discqty='0', trigger_price='0',
                             product_code='mis'):
         url_pass = "placeOrder/executePlaceOrder"
@@ -89,7 +89,7 @@ class ZebuAPI:
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         payload = {'complexty': complexty, 'trading_symbol': symbol, 'discqty': discqty, 'exch': exchange,
                    'transtype': order_type.upper(), 'ret': validity.upper(), 'prctyp': price_type, 'qty': quantity,
-                   'symbol_id': '44330',
+                   'symbol_id': symbol_id,
                    'price': price, 'trigPrice': trigger_price, 'pCode': product_code,
                    'target': target, 'stopLoss': stoploss, 'trailing_stop_loss': t_stoploss}
         payload = [payload]
