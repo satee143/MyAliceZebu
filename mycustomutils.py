@@ -29,7 +29,6 @@ class MYCUSTOMUTILS():
         data = get_history(symbol=symbol,start='2020-01-01',end='2020-01-01')
         return data
 
-print(datetime.date(2020, 4, 1))
 a = MYCUSTOMUTILS()
 print(a.get_history_of_stock('CIPLA'))
 
