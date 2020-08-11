@@ -5,13 +5,11 @@ import jsonpath
 import requests
 
 
-
 class ZebuAPI:
 
     def __init__(self):
         self.baseurl = 'https://www.zebull.in/rest/MobullService/v1/'
         self.headers = {'Content-Type': 'application/json'}
-
 
     def get_encryption_key(self):
         url_pass = "customer/getAPIEncpkey"
@@ -54,7 +52,7 @@ class ZebuAPI:
         credits = jsonpath.jsonpath(response.json()[0], 'credits')
         return credits
 
-    def search_symbol(self,exchange, symbol):
+    def search_symbol(self, exchange, symbol):
         url = "https://www.zebull.in/rest/MobullService/exchange/getScripForSearch"
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
         exchange = [exchange]
@@ -66,7 +64,8 @@ class ZebuAPI:
         # return int(token[0]['token'])
         return response.text
 
-    def place_regular_order(self,exchange, symbol, complexty, order_type, validity, price, price_type, quantity, discqty='0',
+    def place_regular_order(self, exchange, symbol, complexty, order_type, validity, price, price_type, quantity,
+                            discqty='0',
                             trigger_price='0',
                             product_code='mis'):
         url_pass = "placeOrder/executePlaceOrder"
@@ -84,7 +83,8 @@ class ZebuAPI:
         response_status = json.loads(response.text)
         return response_status[0]['nestOrderNumber']
 
-    def place_bracket_order(self,exchange,symbol_id, symbol, complexty, order_type, validity, price, price_type, quantity, target,
+    def place_bracket_order(self, exchange, symbol_id, symbol, complexty, order_type, validity, price, price_type,
+                            quantity, target,
                             stoploss, t_stoploss, discqty='0', trigger_price='0',
                             product_code='mis'):
         url_pass = "placeOrder/executePlaceOrder"
@@ -99,7 +99,7 @@ class ZebuAPI:
         payload = json.dumps(payload)
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
-        response_status=json.loads(response.text)
+        response_status = json.loads(response.text)
         return response_status[0]['nestOrderNumber']
 
     def get_order_book(self):
@@ -118,7 +118,7 @@ class ZebuAPI:
         response = requests.get(url, payload, headers=headers, verify=False)
         return response.text
 
-    def modify_order(self,exchange, nest_ref, symbol, price, price_type, quantity, discqty='0', trigger_price='0'):
+    def modify_order(self, exchange, nest_ref, symbol, price, price_type, quantity, discqty='0', trigger_price='0'):
         url_pass = "placeOrder/executePlaceOrder"
         url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
@@ -131,7 +131,7 @@ class ZebuAPI:
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
 
-    def cancel_order(self,exchange, symbol, nest_ref):
+    def cancel_order(self, exchange, symbol, nest_ref):
         url_pass = "placeOrder/cancelOrder"
         url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
@@ -142,7 +142,7 @@ class ZebuAPI:
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
 
-    def nse_order_history(self,nest_ref):
+    def nse_order_history(self, nest_ref):
         url_pass = "placeOrder/orderHistory"
         url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
@@ -162,7 +162,7 @@ class ZebuAPI:
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
 
-    def get_positions(self,retention):
+    def get_positions(self, retention):
         url_pass = "positionAndHoldings/positionBook"
         url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
@@ -171,7 +171,7 @@ class ZebuAPI:
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
 
-    def conversion_position(self,exchange, quantity, symbol):
+    def conversion_position(self, exchange, quantity, symbol):
         url_pass = "positionAndHoldings/positionConvertion"
         url = self.baseurl + url_pass
         headers = {'Authorization': self.auther_key(), 'Content-Type': 'application/json'}
@@ -184,7 +184,7 @@ class ZebuAPI:
         response = requests.post(url, headers=headers, data=payload, verify=False)
         print(response.text)
 
-    def square_off_position(self,exchange, symbol, quantity, token):
+    def square_off_position(self, exchange, symbol, quantity, token):
         url_pass = "positionAndHoldings/sqrOofPosition"
         url = self.baseurl + url_pass
         payload = {'exchSeg': exchange, 'pCode': 'MIS', 'netQty': quantity, 'tokenNO': '', 'symbol': symbol}
@@ -193,13 +193,11 @@ class ZebuAPI:
         response = requests.post(url, headers=self.headers, data=payload, verify=False)
         print(response.text)
 
+# a=ZebuAPI()
+# print(a.place_bracket_order('NFO', 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', 11050, 'L', '75', 3, 4, 5))
 
-
-#a=ZebuAPI()
-#print(a.place_bracket_order('NFO', 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', 11050, 'L', '75', 3, 4, 5))
-
-#print(place_regular_order('NSE','ASHOKLEY-EQ','regular','BUY','DAY','100','L','1'))
-#print(place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', '100', 'L','75'))
-#print(place_bracket_order('NSE', 'dsfds-EQ', 'bo', 'BUY', 'DAY', 101, 'L', '1', 3, 4, 5))
-#print(search_symbol('nse', 'ASHOKLEY'))
-#print(get_session_id())
+# print(place_regular_order('NSE','ASHOKLEY-EQ','regular','BUY','DAY','100','L','1'))
+# print(place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', '100', 'L','75'))
+# print(place_bracket_order('NSE', 'dsfds-EQ', 'bo', 'BUY', 'DAY', 101, 'L', '1', 3, 4, 5))
+# print(search_symbol('nse', 'ASHOKLEY'))
+# print(get_session_id())

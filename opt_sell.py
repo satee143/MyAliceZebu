@@ -1,6 +1,5 @@
 import csv
 import datetime
-from threading import Timer
 from time import sleep
 
 import requests
@@ -50,7 +49,10 @@ def calling_results():
     else:
         return get_2_top_loosers()
 
+
 print(get_nifty_status())
+
+
 def abc():
     access_token = AliceBlue.login_and_get_access_token(username='AB102865', password='sampath@9', twoFA='a',
                                                         api_secret='CW7LT01PAQRAVVUFQ0VH0PGXV1VJUG10RGWK3IAMIJGHJ1KCXYU1QBZWQJZ1FR53')
