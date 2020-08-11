@@ -21,10 +21,16 @@ class MYCUSTOMUTILS():
         df = df['LTP'].resample(resample, base).ohlc().dropna()
         return df
 
-    def get_history_of_stock(self, symbol, start_date='2020,1,1', end_date=datetime.date.today()):
-        data = get_history(symbol=symbol, start=datetime.date(start_date), end=end_date)
+    def get_history_of_stock(self, symbol, start_date='01-01-2020', end_date='01-08-2020'):
+        start_date=datetime.datetime.strptime(start_date, '%d-%m-%Y')
+        start=datetime.datetime.strftime(start_date,'%Y-%m-%d')
+        print(type(start))
+        # end_date = datetime.datetime.strptime(end_date, '%d-%m-%Y')
+        # end = datetime.datetime.strftime(end_date, '%Y-%m-%d')
+        data = get_history(symbol=symbol,start='2020-01-01',end='2020-01-01')
         return data
 
-
+print(datetime.date(2020, 4, 1))
 a = MYCUSTOMUTILS()
-print(MYCUSTOMUTILS.get_history_of_stock('CIPLA'))
+print(a.get_history_of_stock('CIPLA'))
+
