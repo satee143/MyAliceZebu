@@ -13,7 +13,7 @@ df.reset_index(inplace=True)
 df['Times'] = [datetime.datetime.fromtimestamp(x) for x in df['Times']]
 # df['Times']=pd.to_datetime(df['Times'], unit='s')
 df.set_index('Times', inplace=True)
-df = df['LTP'].resample('30min', offset=15).ohlc().dropna()
+df = df['LTP'].resample('30min', base=15).ohlc().dropna()
 # df=df.drop_duplicates(inplace=False)
 print((df))
 

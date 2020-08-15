@@ -1,4 +1,5 @@
 import datetime
+
 import openpyxl
 import pandas as pd
 
@@ -69,3 +70,6 @@ def nifty_every_5():
 
     sheet.append(f_list)
     book.save('bank_results.xlsx')
+
+
+nifty_every_5()

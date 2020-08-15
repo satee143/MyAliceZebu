@@ -1,7 +1,8 @@
-import logging
 import datetime
+import logging
 import statistics
 from time import sleep
+
 from alice_blue import *
 
 # Config
