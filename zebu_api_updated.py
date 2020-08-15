@@ -20,7 +20,7 @@ class ZebuAPI:
         self._bracket_order = "placeOrder/executePlaceOrder"
         self._order_book = "placeOrder/fetchOrderBook"
         self._trade_book = "placeOrder/fetchTradeBook"
-        self._modify_order = "placeOrder/executePlaceOrder"
+        self._modify_order = "placeOrder/modifyOrder"
         self._cancel_order = "placeOrder/cancelOrder"
         self._order_history = "placeOrder/orderHistory"
         self._get_holdings = "positionAndHoldings/holdings"
@@ -68,10 +68,10 @@ class ZebuAPI:
     def get_limits(self):
         url = self.baseurl + self._limits
         payload = {}
-        self.headers = {'Authorization': self.auther_key()}
-        response = requests.get(url, payload, headers=self.headers)
-        #credits = jsonpath.jsonpath(response.json()[0], 'credits')
-        return response.text
+        headers = {'Authorization': self.auther_key()}
+        response = requests.get(url, payload, headers=headers)
+        credits = jsonpath.jsonpath(response.json()[0], 'credits')
+        return credits
 
     def search_symbol(self, exchange, symbol):
         url = "https://www.zebull.in/rest/MobullService/exchange/getScripForSearch"
@@ -208,10 +208,12 @@ class ZebuAPI:
 
 
 a = ZebuAPI()
-#print(a.place_bracket_order('NFO', 44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', 11230, 'L', '75', 11400, 11005, 5))
+# print(a.place_bracket_order('NFO', 44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', 11230, 'L', '75', 11400, 11005, 5))
 
 # print(place_regular_order('NSE','ASHOKLEY-EQ','regular','BUY','DAY','100','L','1'))
 # print(place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', '100', 'L','75'))
 # print(place_bracket_order('NSE', 'dsfds-EQ', 'bo', 'BUY', 'DAY', 101, 'L', '1', 3, 4, 5))
 # print(search_symbol('nse', 'ASHOKLEY'))
-print(a.get_limits())
+print(a.__dict__)
+print(int(float(a.get_limits()[0])))
+print(a.__dict__)

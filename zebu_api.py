@@ -6,6 +6,7 @@ import requests
 
 
 class ZebuAPI:
+    """ Zebu api for python """
 
     def __init__(self):
         self.baseurl = 'https://www.zebull.in/rest/MobullService/v1/'
@@ -22,14 +23,14 @@ class ZebuAPI:
 
     def api_to_hash(self):
         uid = 'DEL16035'
-        api = 'bRY11QinkR8B5lfvW2eUR5B6UWBgCSMAczzQa2rtYuC5fuZHPyDRh5Ur09fRokOdu5TLQu9iBlZ9LrHR2SrLWXI4yPs5acd6hsUfjQFmTSpqcF2pvTuzSTjZEffVPCxz'
-        str = uid + api + self.get_encryption_key()
-        result = hashlib.sha256(str.encode())
+        api = 'bRY11QinkR8B5lfvW2eUR5B6UWBgCSMAczzQa2rtYuC5fuZHPyDRh5Ur09fRokOdu5TLQu9iBlZ9LrHR2SrLWXI4yPs5acd6hsUfjQFmTSpqcF2pvTuzSTjZEffVPCxz '
+        stri = uid + api + self.get_encryption_key()
+        result = hashlib.sha256(stri.encode())
         value = result.hexdigest()
         return value
 
     def get_session_id(self):
-        ''' Get the Session id '''
+        """ Get the Session id """
         url_pass = "customer/getUserSID"
         url = self.baseurl + url_pass
         userdata = {'userId': 'DEL16035', 'userData': self.api_to_hash()}
@@ -50,8 +51,8 @@ class ZebuAPI:
         payload = {}
         headers = {'Authorization': self.auther_key()}
         response = requests.get(url, payload, headers=headers)
-        credits = jsonpath.jsonpath(response.json()[0], 'credits')
-        return credits
+        credit = jsonpath.jsonpath(response.json()[0], 'credits')
+        return credit
 
     def search_symbol(self, exchange, symbol):
         url = "https://www.zebull.in/rest/MobullService/exchange/getScripForSearch"
@@ -194,8 +195,9 @@ class ZebuAPI:
         response = requests.post(url, headers=self.headers, data=payload)
         print(response.text)
 
-a=ZebuAPI()
-print(a.place_bracket_order('NFO',44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY',11230, 'L', '75', 11400, 11005, 5))
+
+a = ZebuAPI()
+print(a.place_bracket_order('NFO', 44330, 'NIFTY20AUGFUT', 'bo', 'SELL', 'DAY', 11230, 'L', '75', 11400, 11005, 5))
 
 # print(place_regular_order('NSE','ASHOKLEY-EQ','regular','BUY','DAY','100','L','1'))
 # print(place_regular_order('NFO', 'NIFTY20AUGFUT', 'regular', 'BUY', 'DAY', '100', 'L','75'))
