@@ -1,4 +1,5 @@
 import datetime
+
 import pandas as pd
 from nsepy import get_history
 
@@ -21,14 +22,14 @@ class MYCUSTOMUTILS():
         return df
 
     def get_history_of_stock(self, symbol, start_date='01-01-2020', end_date='01-08-2020'):
-        start_date=datetime.datetime.strptime(start_date, '%d-%m-%Y')
-        start=datetime.datetime.strftime(start_date,'%Y-%m-%d')
+        start_date = datetime.datetime.strptime(start_date, '%d-%m-%Y')
+        start = datetime.datetime.strftime(start_date, '%Y-%m-%d')
         print(type(start))
         # end_date = datetime.datetime.strptime(end_date, '%d-%m-%Y')
         # end = datetime.datetime.strftime(end_date, '%Y-%m-%d')
-        data = get_history(symbol=symbol,start='2020-01-01',end='2020-01-01')
+        data = get_history(symbol=symbol, start='2020-01-01', end='2020-01-01')
         return data
+
 
 a = MYCUSTOMUTILS()
 print(a.get_history_of_stock('CIPLA'))
-
