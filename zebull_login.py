@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as wait
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome('C:/drivers/chromedriver.exe')
 
 driver.get('https://www.zebull.in/')
 driver.find_element(By.XPATH, "//input[@type='email']").send_keys('DEL16035')
@@ -14,15 +14,21 @@ driver.find_element(By.XPATH, "//input[@type='Submit']").click()
 time.sleep(2)
 
 text = driver.find_element(By.XPATH, "//mat-label[@class='fontFam']").text
+#if driver.find_element(By.XPATH,"//mat-label[text()='PASSWORD']").text=
 print(text)
 try:
     driver.find_element(By.XPATH, "//input[@type='password']").send_keys('069025')
     time.sleep(5)
+
     submit = wait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='login100-form-btn']")))
     submit.click()
-except:
+    time.sleep(6)
+    print(driver.find_element(By.XPATH,
+                              '/html/body/scripts/app-root/app-home/mat-sidenav-container/mat-sidenav-content/mat-toolbar/div/button/span').text)
 
-    driver.find_element(By.XPATH, "//input[@type='password']").send_keys('usa@143')
+except:
+    driver.find_element(By.XPATH, "//input[@type='password']").clear()
+    driver.find_element(By.XPATH, "//input[@type='password']").send_keys('dusa@1430')
     time.sleep(5)
     submit = wait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='login100-form-btn']")))
     submit.click()
@@ -31,7 +37,7 @@ except:
     driver.find_element(By.XPATH, "//input[@id='pass']").send_keys('a')
     submit = wait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, "//input[@class='login100-form-btn']")))
     submit.click()
-time.sleep(6)
-print(driver.find_element(By.XPATH,
+    time.sleep(6)
+    print(driver.find_element(By.XPATH,
                           '/html/body/scripts/app-root/app-home/mat-sidenav-container/mat-sidenav-content/mat-toolbar/div/button/span').text)
 driver.close()
